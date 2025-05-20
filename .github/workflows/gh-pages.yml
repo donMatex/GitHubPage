@@ -1,4 +1,4 @@
-name: Deploy to GitHub pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -17,10 +17,11 @@ jobs:
           bundler-cache: true
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: "yarn"
+
       - run: yarn install
 
       - name: Build
@@ -29,13 +30,12 @@ jobs:
         run: bin/bridgetown deploy
 
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v1.0.4
+        uses: actions/upload-pages-artifact@v1
         with:
           path: ./output
 
   deploy:
     needs: build
-
     permissions:
       pages: write
       id-token: write
