@@ -28,9 +28,6 @@ jobs:
           BRIDGETOWN_ENV: production
         run: bin/bridgetown deploy
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v1.0.4
         with:
